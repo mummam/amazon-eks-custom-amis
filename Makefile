@@ -1,8 +1,11 @@
 
 PACKER_VARIABLES := binary_bucket_name binary_bucket_region eks_version eks_build_date cni_plugin_version root_volume_size data_volume_size hardening_flag http_proxy https_proxy no_proxy
-VPC_ID := vpc-0e8cf1ce122b1b059
-SUBNET_ID := subnet-0eddf1d7d0f9f9772
-AWS_REGION := us-east-2
+# VPC_ID := vpc-0c5a7ad71dfed7975
+VPC_ID := vpc-f1fe938c #Default vpc
+# SUBNET_ID := subnet-0c9ae92550c50bed3
+SUBNET_ID := subnet-7dd8875c #Default vpc
+AWS_REGION := us-east-1
+# PACKER_FILE := /Users/mmumma/devl/workspaces/verint-vssg/aws/packer-vars.json
 PACKER_FILE := 
 
 EKS_BUILD_DATE := 2020-11-02
@@ -11,6 +14,7 @@ EKS_116_VERSION := 1.16.15
 EKS_117_VERSION := 1.17.12
 EKS_118_VERSION := 1.18.9
 EKS_119_VERSION := 1.19.6
+EKS_119_VERSION := 1.21.2
 
 build:
 	packer build \
@@ -87,6 +91,9 @@ build-rhel7-1.18:
 
 build-rhel7-1.19:
 	$(MAKE) build PACKER_FILE=amazon-eks-node-rhel7.json eks_version=$(EKS_119_VERSION) eks_build_date=2021-01-05
+
+build-rhel7-1.21:
+	$(MAKE) build PACKER_FILE=amazon-eks-node-rhel7.json eks_version=$(EKS_121_VERSION) eks_build_date=2021-09-02
 
 # RHEL 8
 #-----------------------------------------------------
